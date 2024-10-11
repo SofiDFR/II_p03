@@ -16,21 +16,21 @@ void Update()
 
     if (Input.GetKey(KeyCode.UpArrow))
     {
-        Debug.Log("Flecha Arriba: " + (speed * vertical));
+        Debug.Log(keyCode + (speed * vertical));
     }
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            Debug.Log("Flecha Abajo: " + (speed * vertical));
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            Debug.Log("Flecha Izquierda: " + (speed * horizontal));
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            Debug.Log("Flecha Derecha: " + (speed * horizontal));
-        }
+    else if (Input.GetKey(KeyCode.DownArrow))
+    {
+        Debug.Log(keyCode + (speed * vertical));
     }
+    else if (Input.GetKey(KeyCode.LeftArrow))
+    {
+        Debug.Log(keyCode + (speed * horizontal));
+    }
+    else if (Input.GetKey(KeyCode.RightArrow))
+    {
+        Debug.Log(keyCode + (speed * horizontal));
+    }
+}
 ```
 1. 
 
