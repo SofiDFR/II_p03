@@ -38,7 +38,7 @@ void Update()
 ## Ejercicio 2
 Antes de nada, se debe asignar la `tecla H` al comando `Shoot` (Disparo). Para ello vamos a `Edit > proyect Settings > Input Manager > Axes` y allí creamos uno nuevo y ponemos la siguiente información:
 
-![tecla_shoot]()
+![tecla_shoot](docs/shoot.PNG)
 
 ```cs
 public GameObject bulletPrefab;
@@ -90,12 +90,16 @@ Simplemente se establece la posición inicial del cubo con el `eje y = 0`
 ```
 Mueve el cubo en cada frame en la dirección especificada (`moveDirection`) multiplicada por 'speed'. Se usa `Time.deltaTime` para asegurar que el movimiento sea suave e independiente de la velocidad de los fotogramas
 
+![ej_3](docs/p03_3_001.gif)
+
 ### Resultado 1
 - **moveDirection** = (2, 0, 0)
 - **speed** = 2
 - **Posición cubo** = (0, 0, 0)
 
 El cubo se moverá el doble de rápido en la misma dirección especificada originalmente. Avanzará el doble de la distancia por cada frame porque las coordenadas de la dirección son ahora mayores
+
+![ej_3](docs/p03_3_002.gif)
 
 ### Resultado 2
 - **moveDirection** = (1, 0, 0)
@@ -104,12 +108,16 @@ El cubo se moverá el doble de rápido en la misma dirección especificada origi
 
 El cubo se moverá más rápido, cubriendo más distancia por frame. La dirección no cambia
 
+![ej_3](docs/p03_3_003.gif)
+
 ### Resultado 3
 - **moveDirection** = (1, 0, 0)
 - **speed** = 0.5
 - **Posición cubo** = (0, 0, 0)
 
 El cubo se moverá más lento, avanzando menos distancia por frame
+
+![ej_3](docs/p03_3_004.gif)
 
 ### Resultado 4
 - **moveDirection** = (1, 0, 0)
@@ -118,15 +126,23 @@ El cubo se moverá más lento, avanzando menos distancia por frame
 
 El cubo se moverá en la dirección establecida, simpemente a una mayor altura
 
+![ej_3](docs/p03_3_005.gif)
+
 ### Resultado 5
 ```cs
 ```
 - **Sistema de referencia local:** Por defecto, `transform.Translate()` usa el sistema de referencia local del objeto, por lo que el cubo se seguirá moviendo en la misma dirección que en las pruebas anteriores
+
+![ej_3](docs/p03_3_006.gif)
+
 ```cs
 ```
 - Ahora el cubo se moverá usando el sistema de coordenadas del propio mundo y no el suyo propio (local). Para esta prueba se rotó el cubo para que sus ejes no fueran iguales y se pudiera ver la diferencia. En este caso, el cubo va hacia el lado contrario.
 ## Ejercicio 4
+
+![ej_3](docs/p03_005.gif)
 ## Ejercicio 5
+![ej_3](docs/p03_004.gif)
 ## Ejercicio 6
 ## Ejercicio 7
 ## Ejercicio 8
