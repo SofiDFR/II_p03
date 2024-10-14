@@ -399,7 +399,12 @@ El script se le asigna al `cilindro`
 5. Con `Quaternion.Slerp()` se suaviza la rotación, ajustando la rotación actual (`transform.rotation`) hacia la nueva rotación calculada a una velocidad determinada por `rotationSpeed`
 6. Se mueve el objeto con `Translate()`
 
-![ej 10](docs/p03_010.gif)
+***Nota:*** Se hicieron dos versiones del ejercicio
+1. El cubo es `cinemático` pero no tiene script asociado. Se observa que no reacciona ante las físicas
+![ej 10](docs/p03_10_001.gif)
+
+2. El cubo es `cinemático` y tiene script asociado. Ahora gracias al script, el cubo se mueve
+![ej 10](docs/p03_10_002.gif)
 
 ## Ejercicio 11
 ```cs
@@ -411,7 +416,7 @@ El script se le asigna al `cilindro`
 1. `OnTriggerEnter()` se ejecuta cuando un objeto con un collider que tiene la opción `Is Trigger` activada es atravesado por otro objeto con un `collider` y un `Rigidbody`
 2. Cada vez que se activa, se imprime por consola el objeto que lo ha atravesado
 
-![trigger](trigger.png)
-![ej 11](p03_011.gif)
+![trigger](docs/trigger.png)
+![ej 11](docs/p03_011.gif)
 
 ## Ejercicio 12
