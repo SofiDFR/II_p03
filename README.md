@@ -221,9 +221,108 @@ Si el input es `w`, `a`, `s`, `d`, el cubo se moverá en su correspondiente dire
 
 ![ej_3](docs/p03_005.gif)
 ## Ejercicio 5
+Primero hay que asignar:
+- **Horizontal:** `Flechas izquierda y derecha` (eliminamos de teclas alternativas la `A` y `D`)
+- **Vertical:** `Flechas arriba y abajo` (eliminamos de teclas alternativas la `W` y `S`)
+- **HorizontalSphere:** `A` y `D`
+- **VerticalSphere:** `W` y `S`
+  
+```cs
+    public float speed = 5f;
+    public GameObject cube;
+    public GameObject sphere;
+```
+- `speed` es la velocidad el objeto
+- `cube` y `sphere` son referencias a los objetos correspondientes
+
+```cs
+    void Update()
+    {
+        MoveCube();
+        MoveSphere();
+    }
+```
+Simplemente llama a las funciones que mueve a cada objeto con sus respectivas teclas
+
+```cs
+    void MoveCube()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        Vector3 moveDirection = new Vector3(horizontal, 0, vertical);
+        cube.transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
+    }
+
+    void MoveSphere()
+    {
+        float horizontal = Input.GetAxis("HorizontalSphere");
+        float vertical = Input.GetAxis("VerticalSphere");
+
+        Vector3 moveDirection = new Vector3(horizontal, 0, vertical);
+        sphere.transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
+    }
+```
+
+1. Se obtienen los valores de movimiento del usuario con `Input.GetAxis()`
+2. Se crea un vector de dirección con `y = 0`
+3. Con `Translate()` se mueve el objeto correspondiente. `Time.deltaTime` permite que el movimiento sea uniforme sin importar los frames por segundo
+   
 ![ej_3](docs/p03_004.gif)
+
 ## Ejercicio 6
+***Nota:*** Los atributos de la clase son los mismos que los del **ejercicio 5**
+
+```cs
+    void Update()
+    {
+        MoveCubeTowardsSphere();
+        MoveSphere();
+    }
+```
+Simplemente llama a las funciones que mueve a cada objeto con sus respectivas teclas
+
+```cs
+    void MoveCubeTowardsSphere()
+    {
+        Vector3 direction = sphere.transform.position - cube.transform.position;
+        direction.y = 0;
+
+        Vector3 moveDirection = direction.normalized;
+
+        cube.transform.Translate(moveDirection * (speed - 2) * Time.deltaTime, Space.World);
+    }
+```
+1. Se calcula la dirección hacia la que el cubo debe moverse. Al restar la posición del `cubo` de la posición de la `esfera`, obtienes un vector que apunta desde el cubo hacia la esfera
+2. se establece `y = 0` para evitar cualquier movimiento vertical
+3. Se normaliza el vector de dirección para que tenga `magnitud 1`, permitiendo mover el cubo en esa dirección sin importar la distancia real
+4. Con `Translate()` se mueve el cubo a una velocidad de `speed - 2` para que este siempre vaya más lento que la esfera
+
+![ej_6](docs/p03_006.gif)
+
 ## Ejercicio 7
+***Nota:*** Los atributos de la clase son los mismos que los del **ejercicio 5**
+
+```cs
+    void Update()
+    {
+        MoveAndRotateTowardSphere();
+        MoveSphere();
+    }
+```
+Simplemente llama a las funciones que mueve a cada objeto con sus respectivas teclas
+
+```cs
+    void MoveAndRotateTowardSphere()
+    {
+        cube.transform.LookAt(sphere.transform);
+        cube.transform.Translate(Vector3.forward * (speed - 2) * Time.deltaTime);
+    }
+```
+1. Primero se hace que el cubo gire para mirar hacia la dirección de la `esfera`, alineando su frente (el eje Z local del cubo) hacia la posición de la esfera
+2. Se mueve el cubo en su propio sistema de coordenadas locales (hacia su frente) usando `Vector3.forward`
+   
+![ej_7](docs/p03_007.gif)
 ## Ejercicio 8
 ## Ejercicio 9
 ## Ejercicio 10
