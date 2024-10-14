@@ -133,11 +133,14 @@ El cubo se moverá en la dirección establecida, simpemente a una mayor altura
 ```
 - **Sistema de referencia local:** Por defecto, `transform.Translate()` usa el sistema de referencia local del objeto, por lo que el cubo se seguirá moviendo en la misma dirección que en las pruebas anteriores
 
-![ej_3](docs/p03_3_006.gif)
+![ej_3](docs/p03_3_001.gif)
 
 ```cs
 ```
 - Ahora el cubo se moverá usando el sistema de coordenadas del propio mundo y no el suyo propio (local). Para esta prueba se rotó el cubo para que sus ejes no fueran iguales y se pudiera ver la diferencia. En este caso, el cubo va hacia el lado contrario.
+
+![ej_3](docs/p03_3_006.gif)
+
 ## Ejercicio 4
 
 ![ej_3](docs/p03_005.gif)
