@@ -78,15 +78,25 @@ void ExecuteShot()
 ![ej_1](docs/p03_002.gif)
 ## Ejercicio 3
 ```cs
+    public Vector3 moveDirection = new Vector3(1, 0, 0);
+    public float speed = 2f;
 ```
 - `moveDirection` es el vector que indica la dirección del movimiento. Se puede modificar desde el inspector. Inicialmete a (1, 0, 0)
 - `speed` determina la velocidad a la que se mueve el cubo. Inicialmente igual a 2
 
 ```cs
+    void Start()
+    {
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+    }
 ```
 Simplemente se establece la posición inicial del cubo con el `eje y = 0`
 
 ```cs
+    void Update()
+    {
+        transform.Translate(moveDirection.x * speed * Time.deltaTime, moveDirection.y * speed * Time.deltaTime, moveDirection.z * speed * Time.deltaTime);
+    }
 ```
 Mueve el cubo en cada frame en la dirección especificada (`moveDirection`) multiplicada por 'speed'. Se usa `Time.deltaTime` para asegurar que el movimiento sea suave e independiente de la velocidad de los fotogramas
 
@@ -136,12 +146,78 @@ El cubo se moverá en la dirección establecida, simpemente a una mayor altura
 ![ej_3](docs/p03_3_001.gif)
 
 ```cs
+transform.Translate(moveDirection.x * speed * Time.deltaTime, moveDirection.y * speed * Time.deltaTime, moveDirection.z * speed * Time.deltaTime. Space.World);
 ```
 - Ahora el cubo se moverá usando el sistema de coordenadas del propio mundo y no el suyo propio (local). Para esta prueba se rotó el cubo para que sus ejes no fueran iguales y se pudiera ver la diferencia. En este caso, el cubo va hacia el lado contrario.
 
 ![ej_3](docs/p03_3_006.gif)
 
 ## Ejercicio 4
+```cs
+    public float speed = 5f;
+    public GameObject cube;
+    public GameObject sphere;
+```
+- `speed` es la velocidad el objeto
+- `cube` y `sphere` son referencias a los objetos correspondientes
+
+```cs
+    void Update()
+    {
+        InputMoveCube();
+        InputMoveSphere();
+    }
+```
+Simplemente llama a las funciones que mueve a cada objeto con sus respectivas teclas
+
+```cs
+    void InputMoveCube()
+    {
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            cube.transform.Translate(Vector3.forward * speed);
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            cube.transform.Translate(Vector3.back * speed);
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            cube.transform.Translate(Vector3.left * speed);
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            cube.transform.Translate(Vector3.right * speed);
+        }
+        
+    }
+```
+Si el input es la `tecla flecha`, el cubo se moverá en su correspondiente dirección gracias a la función `Translate`
+
+```cs
+    void InputMoveSphere()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            sphere.transform.Translate(Vector3.forward * speed);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            sphere.transform.Translate(Vector3.back * speed);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            sphere.transform.Translate(Vector3.left * speed);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            sphere.transform.Translate(Vector3.right * speed);
+        }
+    }
+```
+Si el input es `w`, `a`, `s`, `d`, el cubo se moverá en su correspondiente dirección (arriba, izquierda, abajo, derecha respectivamente) gracias a la función `Translate`
+
+***Nota:*** Como no se usa `Time.deltaTime`, los movimientos se ven bruscos y salteados
 
 ![ej_3](docs/p03_005.gif)
 ## Ejercicio 5
