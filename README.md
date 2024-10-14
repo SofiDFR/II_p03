@@ -323,7 +323,34 @@ Simplemente llama a las funciones que mueve a cada objeto con sus respectivas te
 2. Se mueve el cubo en su propio sistema de coordenadas locales (hacia su frente) usando `Vector3.forward`
    
 ![ej_7](docs/p03_007.gif)
+
 ## Ejercicio 8
+```cs
+    public float speed = 5f;
+    public float rotationSpeed = 100f;
+```
+- La velocidad de movimiento
+- La velocidad de rotación
+
+```cs
+    void Update()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        transform.Rotate(0, horizontal * rotationSpeed * Time.deltaTime, 0);
+
+        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+
+        Debug.DrawRay(transform.position, transform.forward * 5, Color.red);
+    }
+```
+1. Se obtiene el valor de entrada del usuario para el `eje horizontal`
+2. El objeto gira entorno a su `eje y`, por lo que solo puede girar hacia los lados
+3. Se mueve el objeto con `Translate()` sobre el eje de coordenadas del mundo
+4. Con `Debug.DrawRay()` se dibuja una línea en la escena (que solo se puede ver desde el editor) desde la posición del objeto hacia delante. Ayuda a visualizar la dirección en la mira y se mueve el objeto
+
+![drawray](docs/red_line.PNG)
+
+![ej_8](docs/p03_008.gif)
 ## Ejercicio 9
 ## Ejercicio 10
 ## Ejercicio 11
