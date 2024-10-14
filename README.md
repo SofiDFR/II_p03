@@ -77,6 +77,50 @@ void ExecuteShot()
 
 ![ej_1](docs/p03_002.gif)
 ## Ejercicio 3
+```cs
+```
+- `moveDirection` es el vector que indica la dirección del movimiento. Se puede modificar desde el inspector. Inicialmete a (1, 0, 0)
+- `speed` determina la velocidad a la que se mueve el cubo. Inicialmente igual a 2
+
+```cs
+```
+Simplemente se establece la posición inicial del cubo con el `eje y = 0`
+
+```cs
+```
+Mueve el cubo en cada frame en la dirección especificada (`moveDirection`) multiplicada por 'speed'. Se usa `Time.deltaTime` para asegurar que el movimiento sea suave e independiente de la velocidad de los fotogramas
+
+### Resultado 1
+- **moveDirection** = (2, 0, 0)
+- **speed** = 2
+- **Posición cubo** = (0, 0, 0)
+El cubo se moverá el doble de rápido en la misma dirección especificada originalmente. Avanzará el doble de la distancia por cada frame porque las coordenadas de la dirección son ahora mayores
+
+### Resultado 2
+- **moveDirection** = (1, 0, 0)
+- **speed** = 4
+- **Posición cubo** = (0, 0, 0)
+El cubo se moverá más rápido, cubriendo más distancia por frame. La dirección no cambia
+
+### Resultado 3
+- **moveDirection** = (1, 0, 0)
+- **speed** = 0.5
+- **Posición cubo** = (0, 0, 0)
+El cubo se moverá más lento, avanzando menos distancia por frame
+
+### Resultado 4
+- **moveDirection** = (1, 0, 0)
+- **speed** = 2
+- **Posición cubo** = (0, 1, 0)
+El cubo se moverá en la dirección establecida, simpemente a una mayor altura
+
+### Resultado 5
+```cs
+```
+- **Sistema de referencia local:** Por defecto, `transform.Translate()` usa el sistema de referencia local del objeto, por lo que el cubo se seguirá moviendo en la misma dirección que en las pruebas anteriores
+```cs
+```
+- Ahora el cubo se moverá usando el sistema de coordenadas del propio mundo y no el suyo propio (local). Para esta prueba se rotó el cubo para que sus ejes no fueran iguales y se pudiera ver la diferencia. En este caso, el cubo va hacia el lado contrario.
 ## Ejercicio 4
 ## Ejercicio 5
 ## Ejercicio 6
