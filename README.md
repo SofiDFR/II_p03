@@ -94,24 +94,28 @@ Mueve el cubo en cada frame en la dirección especificada (`moveDirection`) mult
 - **moveDirection** = (2, 0, 0)
 - **speed** = 2
 - **Posición cubo** = (0, 0, 0)
+
 El cubo se moverá el doble de rápido en la misma dirección especificada originalmente. Avanzará el doble de la distancia por cada frame porque las coordenadas de la dirección son ahora mayores
 
 ### Resultado 2
 - **moveDirection** = (1, 0, 0)
 - **speed** = 4
 - **Posición cubo** = (0, 0, 0)
+
 El cubo se moverá más rápido, cubriendo más distancia por frame. La dirección no cambia
 
 ### Resultado 3
 - **moveDirection** = (1, 0, 0)
 - **speed** = 0.5
 - **Posición cubo** = (0, 0, 0)
+
 El cubo se moverá más lento, avanzando menos distancia por frame
 
 ### Resultado 4
 - **moveDirection** = (1, 0, 0)
 - **speed** = 2
 - **Posición cubo** = (0, 1, 0)
+
 El cubo se moverá en la dirección establecida, simpemente a una mayor altura
 
 ### Resultado 5
