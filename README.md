@@ -352,6 +352,21 @@ Simplemente llama a las funciones que mueve a cada objeto con sus respectivas te
 
 ![ej_8](docs/p03_008.gif)
 ## Ejercicio 9
+El script se le asigna al `cilindro`
+```cs
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag != "plane")
+        {
+            Debug.Log("Colisión con: " + collision.gameObject.tag);
+        }
+    }
+```
+1. `OnCollisionEnter()` se activa cuando el objeto al que está unido al script (el cilindro) colisiona con otro objeto
+2. Se el objeto no es el plano (siempre está en contacto con el plano) se imprime por consola el objeto con el que se ha colisionado
+
+![ej 9](docs/p03_009.gif)
+![collisions](docs/collisions.PNG)
 ## Ejercicio 10
 ## Ejercicio 11
 ## Ejercicio 12
