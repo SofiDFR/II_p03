@@ -416,7 +416,7 @@ El script se le asigna al `cilindro`
 1. `OnTriggerEnter()` se ejecuta cuando un objeto con un collider que tiene la opción `Is Trigger` activada es atravesado por otro objeto con un `collider` y un `Rigidbody`
 2. Cada vez que se activa, se imprime por consola el objeto que lo ha atravesado
 
-![trigger](docs/trigger.png)
+![trigger](docs/trigger.PNG)
 ![ej 11](docs/p03_011.gif)
 
 ## Ejercicio 12
