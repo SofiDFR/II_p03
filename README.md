@@ -368,5 +368,50 @@ El script se le asigna al `cilindro`
 ![ej 9](docs/p03_009.gif)
 ![collisions](docs/collisions.PNG)
 ## Ejercicio 10
+```cs
+    public float speed = 5f;
+    public float rotationSpeed = 10f;
+```
+- La velocidad de movimiento
+- La velocidad de rotación
+
+```cs
+    void Update()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        Vector3 moveDirection = new Vector3(horizontal, 0, vertical);
+
+        if (moveDirection.magnitude > 0)
+        {
+            Quaternion rotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+       
+            transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
+        }
+    }
+```
+1. Se obtienen los movimientos del usuario con `Input.GetAxis()`
+2. Se crea un vector de dirección
+3. Se comprueba si hay movimiento
+4. Con `Quaternion.LookRotation(moveDirection)` se consigue que el objeto mire en la dirección hacla la que se mueve
+5. Con `Quaternion.Slerp()` se suaviza la rotación, ajustando la rotación actual (`transform.rotation`) hacia la nueva rotación calculada a una velocidad determinada por `rotationSpeed`
+6. Se mueve el objeto con `Translate()`
+
+![ej 10](docs/p03_010.gif)
+
 ## Ejercicio 11
+```cs
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("El objeto que ha entrado en el Trigger es: " + other.gameObject.tag);
+    }
+```
+1. `OnTriggerEnter()` se ejecuta cuando un objeto con un collider que tiene la opción `Is Trigger` activada es atravesado por otro objeto con un `collider` y un `Rigidbody`
+2. Cada vez que se activa, se imprime por consola el objeto que lo ha atravesado
+
+![trigger](trigger.png)
+![ej 11](p03_011.gif)
+
 ## Ejercicio 12
