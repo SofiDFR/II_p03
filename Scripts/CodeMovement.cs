@@ -12,8 +12,8 @@ public class CodeMovement : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(horizontal, 0, vertical) * speed * Time.deltaTime;
-        transform.Translate(movement);
+        //Vector3 movement = new Vector3(horizontal, 0, vertical) * speed * Time.deltaTime;
+        //transform.Translate(movement);
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
