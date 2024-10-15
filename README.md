@@ -420,3 +420,96 @@ El script se le asigna al `cilindro`
 ![ej 11](docs/p03_011.gif)
 
 ## Ejercicio 12
+
+- Al cilindro se le asignaron las siguientes teclas:
+    - Arriba: `I`
+    - Abajo: `K`
+    - Derecha: `L`
+    - Izquierda: `J` 
+
+```cs
+    public Transform sphere;
+    public float moveSpeed = 5f;
+    public float turnSpeed = 3f;
+    private Rigidbody rb;
+```
+- Referencia a la esfera a la que tiene que girarse el cilindro cuando no esté en movimiento
+- Velocidad de movimiento
+- Velocidad de giro
+- El Rigidbody del objeto (el cilindro)
+
+```cs
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+    }
+```
+1. Se recupera el componente `Rigidbody` del objeto al que está asociado el script. Necesario para aplicarle las fuerzas
+2. Se añaden restricciones en los ejes `X` y `Z` para que el cilindro no se caiga
+
+```cs
+    void FixedUpdate()
+    {
+        float horizontal = Input.GetAxis("HorizontalCylinder");
+        float vertical = Input.GetAxis("VerticalCylinder");
+
+        if (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f)
+        {
+           
+            Vector3 moveDirection = new Vector3(horizontal, 0, vertical).normalized;
+
+            Quaternion toRotation = Quaternion.LookRotation(moveDirection);
+            rb.rotation = Quaternion.Slerp(rb.rotation, toRotation, turnSpeed * Time.deltaTime);
+
+            rb.AddForce(moveDirection * moveSpeed * 2f);
+        }
+        else
+        {
+            if (sphere != null)
+            {
+                Vector3 lookAtGoal = new Vector3(sphere.position.x, this.transform.position.y, sphere.position.z);
+
+                Vector3 directionToSphere = (lookAtGoal - transform.position).normalized;
+
+                Quaternion rotationToSphere = Quaternion.LookRotation(directionToSphere);
+                rb.MoveRotation(Quaternion.Slerp(rb.rotation, rotationToSphere, turnSpeed * Time.fixedDeltaTime));
+            }
+        }
+    }
+```
+1. Se utiliza `FixedUpdate` para manejar lo que está relacionado con la física, es decir, porque se está interactuando directamente con el `Rigidbody` del cilindro y se está aplicando fuerzas físicas como `AddForce()`
+2. Se obtienen los movimientos del usuario con `Input.GetAxis()` Se capturan las
+3. `if (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f)` verifica si el jugador está presionando alguna tecla delmovimiento. (El umbral 0.1f evita movimientos accidentales)
+    1. Se crea un vector de dirección
+    2. Se rota el cilindro hacia la dirección del movimiento
+    3. Se aplica fuerza con `AddForce` en dirección del movimiento del cilindro. La fuerza es proporcional a la velocidad
+4. Cuando no hay movimiento
+    1. Se verifica que hay una esfera asignada para evitar errores
+    2. Se calcula la dirección hacia la esfera
+    3. Se rota el cilindro hacia la esfera 
+
+**Resultados:**
+- Masa esfera (10) > Masa cilindro (1)
+Al cilindro le cuesta mover la esfera ya que es mucho más pesada
+![12 1](docs/p03_12_001.gif)
+
+- Masa esfera (0.5) < Masa cilindro (1)
+El cilindro mueve la esfera con facilidad ya que es mucho más ligera
+![12 2](docs/p03_12_003.gif)
+
+- Esfera como objeto cinemático
+La esfera no reacciona fisicamente a las colisiones. El cilindro no puede mover la esfera
+![12 3](docs/p03_12_002.gif)
+
+- Esfera como trigger
+El cilindro atraviesa la esfera sin colisionar físicamente con ella, pero se pueden utilizar eventos de detección para detectar cuándo el cilindro pasa a través de la esfera
+![12 4](docs/p03_12_004.gif)
+
+- Aumentar fricción de cilindro. De 0.6 a 1.5
+El cilindro se mueve de forma más lenta y se detiene más rápido
+![12 5](docs/p03_12_005.gif)
+
+- Disminuir la fricción. De 0.6 a 0.3
+EL cilindro se mueve más rápido y al dejar de pulsar la tecla movimiento, se sigue deslizando por el plano (por falta de fricción)
+![12 6](docs/p03_12_006.gif)
